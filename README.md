@@ -1,5 +1,5 @@
 # Ex.05 Design a Website for Server Side Processing
-## Date:
+## Date:29/11/2024
 
 ## AIM:
  To design a website to calculate the power of a lamp filament in an incandescent bulb in the server side. 
@@ -32,7 +32,9 @@ Create a HTML file to implement form based input and output.
 Publish the website in the given URL.
 
 ## PROGRAM :
-```
+``` 
+math.html
+
 <html>
 <head>
 <h1 align=	"center"> V Rishon Anand (24900460)</h1>
@@ -86,14 +88,46 @@ Publish the website in the given URL.
 </body>
 </html>
 
+ views.py
+
+ from django.shortcuts import render
+def powerlamp(request): 
+    context={} 
+    context['power']="0" 
+    context['i']="0" 
+    context['r']="0" 
+    if request.method=='POST': 
+        print("POST method is used")
+        i=request.POST.get('intensity','0')
+        r=request.POST.get('resistance','0')
+        print('request=',request) 
+        print('intensity=',i) 
+        print('resistance=',r) 
+        power=(int(i) ** 2 ) * int(r) 
+        context['power']=power
+        context['i']=i
+        context['r']=r 
+        print('Power=',power) 
+    return render(request,'myapp/math.html',context)
+
+    urls.py
+
+    from django.contrib import admin 
+from django.urls import path 
+from myapp import views 
+urlpatterns = [ 
+    path('admin/', admin.site.urls), 
+    path('powerlamp/',views.powerlamp,name="powerlamp"),
+    path('',views.powerlamp,name="powerlamproot")
+]
 ```
 
 
 ## SERVER SIDE PROCESSING:
-
+![alt text](<MathServer/Screenshot 2024-11-29 141457.png>)
 
 ## HOMEPAGE:
-
+![alt text](<MathServer/Screenshot 2024-11-29 141445.png>)
 
 ## RESULT:
 The program for performing server side processing is completed successfully.
