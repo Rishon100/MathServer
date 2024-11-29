@@ -1,19 +1,19 @@
-from django.shortcuts import render 
-def rectarea(request): 
+from django.shortcuts import render
+def powerlamp(request): 
     context={} 
-    context['area'] = "0" 
-    context['l'] = "0" 
-    context['b'] = "0" 
-    if request.method == 'POST': 
+    context['power']="0" 
+    context['i']="0" 
+    context['r']="0" 
+    if request.method=='POST': 
         print("POST method is used")
-        l = request.POST.get('length','0')
-        b = request.POST.get('breadth','0')
+        i=request.POST.get('intensity','0')
+        r=request.POST.get('resistance','0')
         print('request=',request) 
-        print('Length=',l) 
-        print('Breadth=',b) 
-        area = int(l) * int(b) 
-        context['area'] = area 
-        context['l'] = l
-        context['b'] = b 
-        print('Area=',area) 
+        print('intensity=',i) 
+        print('resistance=',r) 
+        power=(int(i) ** 2 ) * int(r) 
+        context['power']=power
+        context['i']=i
+        context['r']=r 
+        print('Power=',power) 
     return render(request,'myapp/math.html',context)
